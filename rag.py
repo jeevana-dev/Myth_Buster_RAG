@@ -1,3 +1,4 @@
+from prompts import SYSTEM_PROMPT
 import os
 
 from langchain_groq import ChatGroq
@@ -57,9 +58,7 @@ class MythBusterRAG:
             )
 
         prompt = f"""
-You are Myth Buster AI.
-
-Answer ONLY using the information below.
+{SYSTEM_PROMPT}
 
 Local Knowledge:
 {context}
@@ -69,13 +68,6 @@ Web Knowledge:
 
 Question:
 {question}
-
-Your response should contain:
-
-1. Verdict (Myth / Fact / Partially True)
-2. Explanation
-3. Evidence
-4. Sources
 """
 
         response = self.llm.invoke(prompt)
